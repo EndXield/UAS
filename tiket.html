@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembelian Tiket</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .ticket-card {
+            margin: 20px 0;
+        }
+        .total-price {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigasi Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Business Name</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Kontak</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Informasi Acara -->
+    <div class="container mt-5">
+        <h2>Pembelian Tiket Acara</h2>
+        <p>Acara: Konser Musik Live</p>
+        <p>Tanggal: 15 Desember 2024</p>
+        <p>Lokasi: Jakarta, Indonesia</p>
+
+        <!-- Pilihan Tiket -->
+        <div class="row">
+            <!-- Card Tiket 1 -->
+            <div class="col-md-4">
+                <div class="card ticket-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Tiket Reguler</h5>
+                        <p class="card-text">Harga: Rp 300.000</p>
+                        <input type="number" min="0" value="0" id="regular-quantity" placeholder="Jumlah" class="form-control mb-2">
+                        <button class="btn btn-primary add-to-cart">Tambah ke Keranjang</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Tiket 2 -->
+            <div class="col-md-4">
+                <div class="card ticket-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Tiket VIP</h5>
+                        <p class="card-text">Harga: Rp 600.000</p>
+                        <input type="number" min="0" value="0" id="vip-quantity" placeholder="Jumlah" class="form-control mb-2">
+                        <button class="btn btn-primary add-to-cart">Tambah ke Keranjang</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Tiket 3 -->
+            <div class="col-md-4">
+                <div class="card ticket-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Tiket Keluarga</h5>
+                        <p class="card-text">Harga: Rp 1.200.000 (untuk 4 orang)</p>
+                        <input type="number" min="0" value="0" id="family-quantity" placeholder="Jumlah" class="form-control mb-2">
+                        <button class="btn btn-primary add-to-cart">Tambah ke Keranjang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Harga -->
+        <div id="total-section" class='mt-4'>
+            <h4>Total Harga: 
+                <span id='total-price' class='total-price'>Rp 0</span></h4> 
+        </div>
+
+        <!-- Tombol Pembelian -->
+        <button id='checkout-button' class='btn btn-success btn-lg mt-3'>Selesaikan Pembelian</button>
+
+    </div>
+
+    <!-- Script JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Script untuk Menghitung Total Harga -->
+    <script>
+        $(document).ready(function() {
+            let total = 0;
+
+            $('.add-to-cart').click(function() {
+                const card = $(this).closest('.ticket-card');
+                const price = parseInt(card.find('.card-text').text().replace('Harga: Rp ', '').replace('.', ''));
+                const quantity = parseInt(card.find('input[type=number]').val());
+
+                total += price * quantity;
+                $('#total-price').text('Rp ' + total.toLocaleString());
+            });
+
+            $('#checkout-button').click(function() {
+                alert('Pembelian selesai! Total yang harus dibayar: ' + $('#total-price').text());
+            });
+        });
+    </script>
+
+</body>
+</html>
